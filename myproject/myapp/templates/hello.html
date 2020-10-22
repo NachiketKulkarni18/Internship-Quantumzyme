@@ -68,7 +68,7 @@
     <script>
 
     function calc_avg(){
-    alert("on click")
+    alert("click ok to proceed-->")
         event.preventDefault()
         let form = $(".graph_form") [0];
         let data = new FormData(form);
@@ -99,13 +99,13 @@ var myChart = new Chart(ctx, {
     data: {
         labels: ['QZ-1','QZ-2','QZ-3'],
         datasets: [{
-    label: "Blue",
+    label: "cpu_usage",
     backgroundColor: "#ffce56",
-    data: [gpu_qz1,0,gpu_qz3 ]
+    data: [cpu_qz1,cpu_qz2,cpu_qz3 ]
   }, {
-    label: "Red",
+    label: "gpu_usage",
     backgroundColor: "red",
-    data: [cpu_qz1,cpu_qz2,cpu_qz3]
+    data: [gpu_qz1,0,gpu_qz3]
   },
 <!--  {-->
 <!--    label: "Green",-->

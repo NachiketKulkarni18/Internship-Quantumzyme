@@ -38,8 +38,12 @@ def perform_sql_query_qz1gpu(start_date, end_date):
     conn.execute(sql_query)
     row = conn.fetchone()
     print("row ", row, type(row))
-    avg = float('.'.join(str(ele) for ele in row))
+    avg = 0
+    if row[0] != None:
+        print("row ", row, type(row))
+        avg = float('.'.join(str(ele) for ele in row))
     return avg
+
 
 
 def perform_sql_query_qz3gpu(start_date, end_date):
@@ -57,7 +61,10 @@ def perform_sql_query_qz3gpu(start_date, end_date):
     conn.execute(sql_query)
     row = conn.fetchone()
     # print("row ", row, type(row))
-    avg = float('.'.join(str(ele) for ele in row))
+    avg = 0
+    if row[0] != None:
+        print("row ", row, type(row))
+        avg = float('.'.join(str(ele) for ele in row))
     return avg
 
 
