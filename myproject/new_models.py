@@ -121,21 +121,14 @@ class DjangoSession(models.Model):
 
 
 class QzServersCpuUsageLogs(models.Model):
-    id_no = models.CharField(max_length=4, blank=True,
-                             null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    avg_cpu_usage = models.CharField(max_length=13, blank=True,
-                                     null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    qz_server = models.CharField(max_length=24, blank=True,
-                                 null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    create_time = models.CharField(max_length=19, blank=True,
-                                   null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    col_1 = models.CharField(db_column='COL 1', max_length=4, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    col_2 = models.CharField(db_column='COL 2', max_length=13, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    col_3 = models.CharField(db_column='COL 3', max_length=24, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    col_4 = models.CharField(db_column='COL 4', max_length=19, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
 
     class Meta:
         managed = False
         db_table = 'qz_servers_cpu_usage_logs'
-
-    def __str__(self):
-        return u'%s %s %s %s' % (self.id_no, self.avg_cpu_usage, self.qz_server, self.create_time)
 
 
 class QzServersGpuUsageLogs(models.Model):
@@ -155,9 +148,6 @@ class QzServersGpuUsageLogs(models.Model):
     server_name = models.CharField(max_length=24, blank=True, null=True)
     created_timestamp = models.CharField(max_length=19, blank=True, null=True)
 
-
     class Meta:
         managed = False
-        db_table = 'qz_server_gpu_usage_logs'
-    def __str__(self):
-        return u'%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s' % (self.id_no,self.col_2,self.col_3,self.col_4,self.col_5,self.col_6,self.col_7,self.col_8,self.utilization_gpu,self.col_10,self.col_11,self.col_12,self.col_13,self.server_name,self.created_timestamp)
+        db_table = 'qz_servers_gpu_usage_logs'

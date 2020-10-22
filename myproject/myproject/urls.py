@@ -27,4 +27,5 @@ urlpatterns = [
 
                        url(r'^admin', admin.site.urls),
                        url(r'^$', views.hello),
+                       url(r'^render_graph', views.render_graph),
                        ]

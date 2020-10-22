@@ -41,9 +41,100 @@
 <!--});-->
 <!--})-->
 <!--</script>-->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 </head>
+
 <body>
-<h1>hello world</h1>
-<button class="example">hello</button>
+<div class="container mt-5" style="">
+
+<form action="" class="graph_form">
+    <h1>CPU AND GPU USAGE</h1>
+    <BR>
+
+  <label for="start_date">START DATE</label>
+  <input type="date" id="start_date" name="start_date" required>
+    <label>END DATE</label>
+    <input type="date" id="end_date" name="end_date" required>
+    <br>
+    <button class="calculate_avg" onclick="calc_avg()" style="margin-top:50px;">Calculate Average</button>
+</form>
+    <canvas id="myChart" width="50" height="50"></canvas>
+    <label id="graph_label"></label>
+    <script>
+
+    function calc_avg(){
+    alert("on click")
+        event.preventDefault()
+        let form = $(".graph_form") [0];
+        let data = new FormData(form);
+        $.ajax({
+            type:"POST",
+            url :"/render_graph/",
+            data: data,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            cache: false,
+            async:false,
+            success : function (returned,status,xhr){
+                let gpu_qz1 = returned['average_calculated_gpu_qz1'];
+                let gpu_qz3 = returned['average_calculated_gpu_qz3'];
+                let cpu_qz1 = returned['average_calculated_cpu_qz1'];
+                let cpu_qz2 = returned['average_calculated_cpu_qz2'];
+                let cpu_qz3 = returned['average_calculated_cpu_qz3'];
+                qzchart(gpu_qz1,gpu_qz3,cpu_qz1,cpu_qz2,cpu_qz3);
+            }
+        })
+    }
+
+function qzchart(gpu_qz1,gpu_qz3,cpu_qz1,cpu_qz2,cpu_qz3) {
+      var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['QZ-1','QZ-2','QZ-3'],
+        datasets: [{
+    label: "Blue",
+    backgroundColor: "#ffce56",
+    data: [gpu_qz1,0,gpu_qz3 ]
+  }, {
+    label: "Red",
+    backgroundColor: "red",
+    data: [cpu_qz1,cpu_qz2,cpu_qz3]
+  },
+<!--  {-->
+<!--    label: "Green",-->
+<!--    backgroundColor: "green",-->
+<!--    data: [7, 2, 6]-->
+<!--  }-->
+  ]
+    },
+    options: {
+          barValueSpacing: 20,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+
+}
+
+
+</script>
+</div>
+
+
+
+
 </body>
 </html>

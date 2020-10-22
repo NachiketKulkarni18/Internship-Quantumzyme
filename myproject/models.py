@@ -121,33 +121,57 @@ class DjangoSession(models.Model):
 
 
 class QzServersCpuUsageLogs(models.Model):
-    col_1 = models.CharField(db_column='COL 1', max_length=4, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    col_2 = models.CharField(db_column='COL 2', max_length=13, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    col_3 = models.CharField(db_column='COL 3', max_length=24, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    col_4 = models.CharField(db_column='COL 4', max_length=19, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    id_no = models.CharField(max_length=4, blank=True,
+                             null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    avg_cpu_usage = models.CharField(max_length=13, blank=True,
+                                     null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    qz_server = models.CharField(max_length=24, blank=True,
+                                 null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    create_time = models.CharField(max_length=19, blank=True,
+                                   null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
 
     class Meta:
         managed = False
         db_table = 'qz_servers_cpu_usage_logs'
 
+    def __str__(self):
+        return u'%s %s %s %s' % (self.id_no, self.avg_cpu_usage, self.qz_server, self.create_time)
+
 
 class QzServersGpuUsageLogs(models.Model):
-    col_1 = models.CharField(db_column='COL 1', max_length=5, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    col_2 = models.CharField(db_column='COL 2', max_length=12, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    col_3 = models.CharField(db_column='COL 3', max_length=16, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    col_4 = models.CharField(db_column='COL 4', max_length=14, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    col_5 = models.CharField(db_column='COL 5', max_length=6, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    col_6 = models.CharField(db_column='COL 6', max_length=17, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    col_7 = models.CharField(db_column='COL 7', max_length=21, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    col_8 = models.CharField(db_column='COL 8', max_length=15, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    col_9 = models.CharField(db_column='COL 9', max_length=15, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    col_10 = models.CharField(db_column='COL 10', max_length=18, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    col_11 = models.CharField(db_column='COL 11', max_length=19, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    col_12 = models.CharField(db_column='COL 12', max_length=11, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    col_13 = models.CharField(db_column='COL 13', max_length=11, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    col_14 = models.CharField(db_column='COL 14', max_length=24, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    col_15 = models.CharField(db_column='COL 15', max_length=19, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    id_no = models.CharField(max_length=5, blank=True, null=True)
+    col_2 = models.CharField(db_column='COL 2', max_length=12, blank=True,
+                             null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    col_3 = models.CharField(db_column='COL 3', max_length=16, blank=True,
+                             null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    col_4 = models.CharField(db_column='COL 4', max_length=14, blank=True,
+                             null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    col_5 = models.CharField(db_column='COL 5', max_length=6, blank=True,
+                             null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    col_6 = models.CharField(db_column='COL 6', max_length=17, blank=True,
+                             null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    col_7 = models.CharField(db_column='COL 7', max_length=21, blank=True,
+                             null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    col_8 = models.CharField(db_column='COL 8', max_length=15, blank=True,
+                             null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    utilization_gpu = models.CharField(max_length=15, blank=True, null=True)
+    col_10 = models.CharField(db_column='COL 10', max_length=18, blank=True,
+                              null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    col_11 = models.CharField(db_column='COL 11', max_length=19, blank=True,
+                              null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    col_12 = models.CharField(db_column='COL 12', max_length=11, blank=True,
+                              null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    col_13 = models.CharField(db_column='COL 13', max_length=11, blank=True,
+                              null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    server_name = models.CharField(max_length=24, blank=True, null=True)
+    created_timestamp = models.CharField(max_length=19, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'qz_servers_gpu_usage_logs'
+
+    def __str__(self):
+        return u'%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s' % (
+        self.id_no, self.col_2, self.col_3, self.col_4, self.col_5, self.col_6, self.col_7, self.col_8,
+        self.utilization_gpu, self.col_10, self.col_11, self.col_12, self.col_13, self.server_name,
+        self.created_timestamp)
